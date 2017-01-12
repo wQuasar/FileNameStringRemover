@@ -10,7 +10,7 @@ def removeString(sub_string, replace_string):
 	for file in file_list:
 		if os.path.isfile(file):
 			if file != "StringRemover.py":
-				new_name = getNewName(file.split(), sub_string.split(), replace_string.split())
+				new_name = getNewName(file, sub_string, replace_string)
 
 				# Replacing only if a valid name change
 				if (new_name == ""):
@@ -22,21 +22,18 @@ def removeString(sub_string, replace_string):
 
 
 # Method to do most of the grunt work. Get the new name of the file as a string after replacing the substring.
-def getNewName(old_name, sub_string_list, replace_string_list):
-	extension = old_name[len(old_name) -1][old_name[len(old_name) - 1].find("."):]
-	old_name[len(old_name) - 1] = old_name[len(old_name) -1][:old_name[len(old_name) - 1].find(".")]
-
-	# Traversing through the entire name. Using while loop because we're changing the list each [valid] time
+def getNewName(old_name, sub_string, replace_string):
+	# Traversing through the entire name. Using while loop because we're changing the string each [valid] time
 	i = 0
-	while (i < len(old_name) - len(sub_string_list) + 1):
-		if (old_name[i] == sub_string_list[0]):
+	while (i < len(old_name) - len(sub_string) + 1):
+		if (old_name[i] == sub_string[0]):
 			# Vars to keep track of the indexes
 			begin = i
 			end = i
 
 			# Found the name! Let's traverse further to find if it is present in its entirety
-			for j in range(1, len(sub_string_list)):
-				if old_name[i + j] != sub_string_list[j]:
+			for j in range(1, len(sub_string)):
+				if old_name[i + j] != sub_string[j]:
 					end = -1
 					break
 				else:
@@ -44,8 +41,7 @@ def getNewName(old_name, sub_string_list, replace_string_list):
 
 			# end == -1 indicates that the string was not present in its entirety
 			if end != -1:
-				old_name = old_name[:begin] + replace_string_list + old_name[end + 1:]
-
+				old_name = old_name[:begin] + replace_string + old_name[end + 1:]
 
 		i += 1
 
@@ -53,14 +49,11 @@ def getNewName(old_name, sub_string_list, replace_string_list):
 	if (old_name == [""]):
 		return ""
 
-	# Adding the exension to the last index
-	old_name[len(old_name) - 1] = old_name[len(old_name) - 1] + extension
-
-	# Finally joining the name and returning
-	return " ".join(old_name)
+	# Finally returning the name
+	return old_name
 
 
-# Main init method
+# Main init function
 def init():
 	print ("** KEEP BACKUPS YOU PUNK! **\n")
 	sub_string = input("Enter the substring to be removed from the file names in this folder: ")
