@@ -45,7 +45,7 @@ def getNewName(old_name, sub_string, replace_string):
 
 		i += 1
 
-	# if the entire name is "", just return that (will not be renamed)
+	# If the entire name is "", just return that (will not be renamed)
 	if (old_name == [""]):
 		return ""
 
