@@ -9,7 +9,7 @@ def removeString(sub_string, replace_string):
 
 	for file in file_list:
 		if os.path.isfile(file):
-			if file != "StringRemover.py":
+			if file != "FileNameStringReplacer.py":
 				new_name = getNewName(file, sub_string, replace_string)
 
 				# Replacing only if a valid name change
