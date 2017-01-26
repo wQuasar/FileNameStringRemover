@@ -45,7 +45,7 @@ def getNewName(old_name, sub_string, replace_string):
 
 		i += 1
 
-	# If the entire name is "", just return that (will not be renamed)
+	# if the entire name is "", just return that (will not be renamed)
 	if (old_name == [""]):
 		return ""
 
@@ -57,16 +57,15 @@ def getNewName(old_name, sub_string, replace_string):
 def init():
 	print ("** KEEP BACKUPS YOU PUNK! **\n")
 	sub_string = input("Enter the substring to be removed from the file names in this folder: ")
-	replace_string = input("Enter the string to be replaced it with (Just press ENTER if nothing): ")
 
-	print ("----- BEGIN PROCESSING -----\n")
-
-	if (sub_string != ""):
-		removeString(sub_string, replace_string)
-	else :
+	if (sub_string == ""):
 		print ("WTF! You entered nothing?!")
+	else :
+		replace_string = input("Enter the string to be replaced it with (Just press ENTER if nothing): ")
 
-	print ("\n----- END PROCESSING ----- ")
+		print ("----- BEGIN PROCESSING -----\n")
+		removeString(sub_string, replace_string)
+		print ("\n----- END PROCESSING ----- ")
 
 # Self start
 init()
